@@ -42,14 +42,18 @@ class OtodomItem(scrapy.Item):
     czynsz = scrapy.Field(input_processor=MapCompose(filter_price), output_processor=TakeFirst())
     okna = scrapy.Field(output_processor=TakeFirst())
     forma_wlasnosci = scrapy.Field(output_processor=TakeFirst())
-    liczba_pokoi = scrapy.Field(output_processor=TakeFirst())
-    pietro = scrapy.Field(output_processor=TakeFirst())
+    liczba_pokoi = scrapy.Field(input_processor=MapCompose(str.strip),
+                                output_processor=TakeFirst())
+    pietro = scrapy.Field(input_processor=MapCompose(str.strip),
+                          output_processor=TakeFirst())
     ogrzewanie = scrapy.Field(output_processor=TakeFirst())
     rynek = scrapy.Field(output_processor=TakeFirst())
     liczba_pieter = scrapy.Field(output_processor=TakeFirst())
     stan_wykonczenia = scrapy.Field(output_processor=TakeFirst())
-    opis = scrapy.Field(output_processor=TakeFirst())
-    rok_budowy = scrapy.Field(output_processor=TakeFirst())
+    opis = scrapy.Field(input_processor=MapCompose(str.strip),
+                        output_processor=TakeFirst())
+    rok_budowy = scrapy.Field(input_processor=MapCompose(str.strip),
+                              output_processor=TakeFirst())
     material_budynku = scrapy.Field(output_processor=TakeFirst())
 
     balkon = scrapy.Field(output_processor=TakeFirst())
