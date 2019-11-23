@@ -28,10 +28,10 @@ class OtodomMieszkaniaSpider(scrapy.Spider):
             yield response.follow(next_page_link.extract_first(), callback=self.parse)
 
     def get_offer_details(self, response):
-        # find script with lon and lat
         offer_item = ItemLoader(item=OtodomItem(), selector=response)
 
         offer_item.add_value('link', response.url)
+        offer_item.add_value('data_pobrania', str(datetime.now()))
         offer_item.add_xpath('tytul', "//h1[@class='css-18igut2']/text()")
         offer_item.add_xpath('cena', '//div[@class="css-1vr19r7"]/text()')
 
@@ -51,7 +51,6 @@ class OtodomMieszkaniaSpider(scrapy.Spider):
                 offer_item.add_value('address', address)
                 offer_item.add_value('opis', description)
 
-        offer_item.add_value('data_pobrania', str(datetime.now()))
         offer_item.add_xpath('powierzchnia', '//li[contains(normalize-space(.), "Powierzchnia:")]/strong/text()')
         offer_item.add_xpath('rodzaj_zabudowy', '//li[contains(normalize-space(.), "Rodzaj zabudowy:")]/strong/text()')
         offer_item.add_xpath('okna', '//li[contains(normalize-space(.), "Okna:")]/strong/text()')
