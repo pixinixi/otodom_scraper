@@ -32,7 +32,7 @@ class OtodomMieszkaniaSpider(scrapy.Spider):
 
         offer_item.add_value('link', response.url)
         offer_item.add_value('data_pobrania', str(datetime.now()))
-        offer_item.add_xpath('tytul', "//h1[@class='css-18igut2']/text()")
+        offer_item.add_xpath('tytul', "//h1[@class='css-1ld8fwi']/text()")
         offer_item.add_xpath('cena', '//div[@class="css-1vr19r7"]/text()')
 
         for script in response.xpath("//script[@type='application/ld+json']"):
